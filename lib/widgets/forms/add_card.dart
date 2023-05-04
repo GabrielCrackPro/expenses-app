@@ -55,6 +55,14 @@ class _AddCardState extends State<AddCard> {
   @override
   Widget build(BuildContext context) {
     var color = Theme.of(context).colorScheme;
+
+    InputBorder enabledBorder = OutlineInputBorder(
+      borderSide: BorderSide(color: color.primary),
+    );
+    InputBorder errorBorder = OutlineInputBorder(
+      borderSide: BorderSide(color: color.error),
+    );
+
     return Scaffold(
       body: Column(
         children: [
@@ -86,22 +94,38 @@ class _AddCardState extends State<AddCard> {
                       hintText: 'XXXX XXXX XXXX XXXX',
                       hintStyle: TextStyle(color: color.primary),
                       labelStyle: TextStyle(color: color.primary),
+                      focusedBorder: enabledBorder,
+                      focusedErrorBorder: errorBorder,
+                      enabledBorder: enabledBorder,
+                      errorBorder: errorBorder,
                     ),
                     expiryDateDecoration: InputDecoration(
                       labelText: 'Expired Date',
                       hintText: 'XX/XX',
                       hintStyle: TextStyle(color: color.primary),
                       labelStyle: TextStyle(color: color.primary),
+                      focusedBorder: enabledBorder,
+                      enabledBorder: enabledBorder,
+                      errorBorder: errorBorder,
+                      focusedErrorBorder: errorBorder,
                     ),
                     cvvCodeDecoration: InputDecoration(
                       labelText: 'CVV',
                       hintText: 'XXX',
                       hintStyle: TextStyle(color: color.primary),
                       labelStyle: TextStyle(color: color.primary),
+                      focusedBorder: enabledBorder,
+                      enabledBorder: enabledBorder,
+                      errorBorder: errorBorder,
+                      focusedErrorBorder: errorBorder,
                     ),
                     cardHolderDecoration: InputDecoration(
                       labelText: 'Card Holder',
                       labelStyle: TextStyle(color: color.primary),
+                      focusedBorder: enabledBorder,
+                      enabledBorder: enabledBorder,
+                      errorBorder: errorBorder,
+                      focusedErrorBorder: errorBorder,
                     ),
                     onCreditCardModelChange: onCreditCardModelChange,
                     autovalidateMode: AutovalidateMode.always,
