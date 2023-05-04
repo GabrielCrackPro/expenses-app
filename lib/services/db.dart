@@ -1,29 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FirebaseUtils {
+class DbUtils {
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   static Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> getData(
     String collectionName,
   ) async =>
-      await _db.collection(collectionName).get().then((event) {
-        return event.docs;
-      });
+      await _db.collection(collectionName).get().then(
+        (event) {
+          return event.docs;
+        },
+      );
 
-  static Future<List<Map<String, dynamic>>> getUsers() async {
-    var users = await _db.collection("Users").get();
-    return users.docs.map((doc) => doc.data()).toList();
-  }
+  static Future<void> addData(
+    String collectionName,
+    Map<String, dynamic> user,
+  ) async =>
+      await _db.collection(collectionName).add(user);
 
-  static Future<void> addUser(Map<String, dynamic> user) async {
-    await _db.collection("users").add(user);
-  }
+  static Future<void> deleteData(
+    String collectionName,
+    String documentId,
+  ) async =>
+      await _db.collection(collectionName).doc(documentId).delete();
 
-  static Future<void> deleteUser(String userId) async {
-    await _db.collection("users").doc(userId).delete();
-  }
-
-  static void addTestUser() {
+  static Future<void> addTestUser() async {
     final testUser = <String, dynamic>{
       "displayname": "Test user",
       "email": "test@test.com",
@@ -32,6 +33,7 @@ class FirebaseUtils {
     };
     _db.collection("Users").add(testUser).then(
       (DocumentReference doc) {
+        // ignore: avoid_print
         print("test user added with id: ${doc.id}");
       },
     );
