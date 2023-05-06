@@ -1,7 +1,9 @@
 import 'package:expenses_app/main.dart';
+import 'package:expenses_app/services/auth.dart';
 import 'package:expenses_app/widgets/bottom_appbar/bottom_appbar.dart';
 import 'package:expenses_app/widgets/fab/fab.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -68,7 +70,18 @@ class _SettingsPageState extends State<SettingsPage> {
                     onChanged: changeTheme,
                     activeColor: color.primary,
                   ),
-                )
+                ),
+                ListTile(
+                  onTap: () => Auth.signOut(context),
+                  title: Text(
+                    "Log Out",
+                    style: text.titleLarge,
+                  ),
+                  trailing: Icon(
+                    FontAwesomeIcons.doorClosed,
+                    color: color.primary,
+                  ),
+                ),
               ],
             ),
           ),

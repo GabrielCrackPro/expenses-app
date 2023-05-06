@@ -1,3 +1,4 @@
+// ignore_for_file: use_build_context_synchronously
 import 'package:expenses_app/widgets/alert/alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,13 +22,27 @@ class Auth {
           Alert.error("Invalid Email");
           break;
         case "user-not-found":
+          Alert.error("User not found");
           break;
         case "wrong-password":
+          Alert.error("Incorrect password");
           break;
         default:
           Alert.error(error.code);
           return;
       }
+    } catch (e) {
+      // ignore: avoid_print
+      print(e.toString());
+    }
+  }
+
+  static Future<void> signOut(
+    BuildContext context,
+  ) async {
+    try {
+      _auth.signOut();
+      GoRouter.of(context).goNamed("login");
     } catch (e) {
       // ignore: avoid_print
       print(e.toString());
