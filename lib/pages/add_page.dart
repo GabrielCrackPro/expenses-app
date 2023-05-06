@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:expenses_app/services/db.dart';
 import 'package:expenses_app/widgets/category_selector/category_selector.dart';
 import 'package:expenses_app/widgets/numpad/numpad.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,9 +17,12 @@ class _AddPageState extends State<AddPage> {
   @override
   Widget build(BuildContext context) {
     var colors = Theme.of(context).colorScheme;
+    final FirebaseAuth _auth = FirebaseAuth.instance;
 
-    void addExpense() {
-      GoRouter.of(context).pop();
+    void addExpense() async {
+      // TODO: Add expense data
+      Map<String, dynamic> expenseData = {};
+      await DbUtils.addExpense(_auth.currentUser!, expenseData);
     }
 
     return Scaffold(

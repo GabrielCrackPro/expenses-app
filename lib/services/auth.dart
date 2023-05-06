@@ -1,4 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:expenses_app/services/db.dart';
 import 'package:expenses_app/widgets/alert/alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -56,10 +57,12 @@ class Auth {
   ) async {
     Alert.init(context);
     try {
-      await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredentials =
+          await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      DbUtils.addUser(userCredentials);
       Alert.success("User created $email");
     } on FirebaseAuthException catch (error) {
       switch (error.code) {
