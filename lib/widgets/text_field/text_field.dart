@@ -6,6 +6,7 @@ class CustomTextField extends StatelessWidget {
   TextInputType inputType;
   TextEditingController? controller;
   bool isPasswordField;
+  String? Function(String?)? validator;
 
   CustomTextField({
     super.key,
@@ -13,6 +14,7 @@ class CustomTextField extends StatelessWidget {
     this.inputType = TextInputType.text,
     this.isPasswordField = false,
     this.controller,
+    this.validator,
   });
 
   @override
@@ -28,6 +30,7 @@ class CustomTextField extends StatelessWidget {
     );
 
     return TextFormField(
+      validator: validator,
       keyboardType: inputType,
       controller: controller,
       obscureText: isPasswordField,
