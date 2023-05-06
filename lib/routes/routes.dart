@@ -2,6 +2,7 @@ import 'package:expenses_app/pages/add_extras.dart';
 import 'package:expenses_app/pages/add_page.dart';
 import 'package:expenses_app/pages/home_page.dart';
 import 'package:expenses_app/pages/login_page.dart';
+import 'package:expenses_app/pages/register_page.dart';
 import 'package:expenses_app/pages/settings_page.dart';
 import 'package:expenses_app/pages/wallet_page.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,15 @@ class AppRoutes {
           pageBuilder: (context, state) {
             return const MaterialPage(
               child: LoginPage(),
+            );
+          },
+        ),
+        GoRoute(
+          name: AppRouterConstants.register,
+          path: "/register",
+          pageBuilder: (context, state) {
+            return const MaterialPage(
+              child: RegisterPage(),
             );
           },
         ),
@@ -86,6 +96,7 @@ class AppRoutes {
 
 class AppRouterConstants {
   static const String login = "login";
+  static const String register = "register";
   static const String home = "home";
   static const String pie = "pie_graph";
   static const String add = "add";

@@ -1,6 +1,7 @@
 import 'package:expenses_app/widgets/alert/alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Auth {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -12,6 +13,7 @@ class Auth {
   ) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
+      GoRouter.of(context).goNamed("home");
     } on FirebaseAuthException catch (error) {
       Alert.init(context);
       switch (error.code) {
@@ -37,13 +39,14 @@ class Auth {
     String email,
     String password,
   ) async {
+    Alert.init(context);
     try {
       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      Alert.success("User created $email");
     } on FirebaseAuthException catch (error) {
-      Alert.init(context);
       switch (error.code) {
         case "invalid-email":
           Alert.error("Invalid email");

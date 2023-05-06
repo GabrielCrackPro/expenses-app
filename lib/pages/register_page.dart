@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -23,14 +23,14 @@ class _LoginPageState extends State<LoginPage> {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
-    void loginWithEmailAndPassword(String email, String password) {
+    void createUserWithEmailAndPassword(String email, String password) {
       if (_formKey.currentState!.validate()) {
-        Auth.signInWithEmailAndPassword(context, email, password);
+        Auth.createUserWithEmailAndPassword(context, email, password);
       }
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Login")),
+      appBar: AppBar(title: const Text("Join")),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Column(
@@ -68,13 +68,13 @@ class _LoginPageState extends State<LoginPage> {
                     height: 30,
                   ),
                   ElevatedButton.icon(
-                    onPressed: () => loginWithEmailAndPassword(
+                    onPressed: () => createUserWithEmailAndPassword(
                       emailController.text,
                       passwordController.text,
                     ),
-                    icon: const Icon(FontAwesomeIcons.doorOpen),
+                    icon: const Icon(FontAwesomeIcons.plus),
                     label: Text(
-                      "Login",
+                      "Create account",
                       style: text.bodySmall!.copyWith(color: color.onPrimary),
                     ),
                     style: ButtonStyle(
@@ -90,13 +90,13 @@ class _LoginPageState extends State<LoginPage> {
                   RichText(
                     text: TextSpan(
                       children: [
-                        const TextSpan(text: "Don't have an account? "),
+                        const TextSpan(text: "Already have an account? "),
                         TextSpan(
-                          text: "Join now",
+                          text: "Log in",
                           style: text.bodySmall!.copyWith(color: color.primary),
                           recognizer: TapGestureRecognizer()
                             ..onTap =
-                                () => GoRouter.of(context).goNamed("register"),
+                                () => GoRouter.of(context).goNamed("login"),
                         ),
                       ],
                     ),
